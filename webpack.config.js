@@ -23,7 +23,7 @@ let plugins = [
     jQuery: 'jquery',
   }),
   new HtmlWebpackPlugin({
-    title: 'Beyond The Summit',
+    title: 'Initial React Redux Setup',
     // Required
     inject: false,
     template: require('html-webpack-template'),

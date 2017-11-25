@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { Map } from 'immutable';
 import configureStore from './app/store';
 import App from './app';
 
-const store = configureStore({});
+const store = configureStore(Map({}));
 
 const renderApp = Component => ReactDOM.render( // eslint-disable-line react/no-render-return-value
   <AppContainer>
