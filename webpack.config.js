@@ -110,7 +110,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)?$/,
-        loader: ['style-loader', 'css-loader', 'sass-loader'],
+        loader: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
     ],
   },
