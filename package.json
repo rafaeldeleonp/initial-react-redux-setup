@@ -30,6 +30,7 @@
     "redux-logger": "^3.0.6"
   },
   "devDependencies": {
+    "autoprefixer": "^7.2.3",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-jest": "^21.2.0",
@@ -51,6 +52,8 @@
     "html-webpack-template": "^6.1.0",
     "jest": "^21.2.1",
     "postcss-loader": "^2.0.9",
+    "postcss-smart-import": "^0.7.6",
+    "precss": "^2.0.0",
     "resolve-url-loader": "^2.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
