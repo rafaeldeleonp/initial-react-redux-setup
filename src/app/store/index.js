@@ -1,33 +1,14 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { combineReducers } from 'redux-immutable';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
-import { Map } from 'immutable';
+import rootReducers from '../reducers';
 
 let finalCreateStore;
 let store;
 
-const getReducers = () => {
-  // eslint-disable-next-line
-  const componentsRedux = require('./views');
-  // eslint-disable-next-line
-  const viewsRedux = require('./components');
-
-  const rootReducers = combineReducers({
-    ...componentsRedux,
-    ...viewsRedux,
-  });
-
-  return {
-    rootReducers,
-  };
-};
-
-export default function configureStore(initialState = Map({})) {
+export default function configureStore(initialState = {}) {
   if (store) {
     return store;
   }
-
-  const { rootReducers } = getReducers();
 
   if (process.env.NODE_ENV === 'production') {
     finalCreateStore = createStore;
@@ -35,13 +16,15 @@ export default function configureStore(initialState = Map({})) {
     finalCreateStore = compose(applyMiddleware(createLogger({ collapsed: true })))(createStore);
   }
 
-  store = finalCreateStore(combineReducers(rootReducers), initialState);
+  store = finalCreateStore(combineReducers({
+    ...rootReducers,
+  }), initialState);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../index.js', () => {
-      const nextRootReducer = getReducers();
-      store.replaceReducer(...nextRootReducer);
+      const nextRootReducer = rootReducers;
+      store.replaceReducer(combineReducers({ ...nextRootReducer }));
     });
   }
 

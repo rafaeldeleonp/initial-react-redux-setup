@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import queryString from 'query-string';
 import createHistory from 'history/createBrowserHistory';
@@ -26,14 +28,21 @@ class Root extends React.Component {
   };
 
   render() {
+    const { store } = this.props;
     const me = this;
 
     return (
-      <Router history={me.history}>
-        <Main />
-      </Router>
+      <Provider store={store}>
+        <Router history={me.history}>
+          <Main />
+        </Router>
+      </Provider>
     );
   }
 }
+
+Root.propTypes = {
+  store: PropTypes.object.isRequired,
+};
 
 export default Root;
